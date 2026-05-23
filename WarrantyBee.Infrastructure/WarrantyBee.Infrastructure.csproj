@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>WarrantyBee.Shared.Infrastructure</PackageId>
+    <Authors>Arijit Roy</Authors>
+    <Company>WarrantyBee</Company>
+    <Description>High-scale infrastructure blueprints and cross-cutting concerns for the WarrantyBee ecosystem.</Description>
+    <PackageIcon>logo.png</PackageIcon>
+    <Version>1.0.3</Version>
+    <RepositoryUrl>https://github.com/WarrantyBee/WarrantyBee.Shared</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="logo.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.8" />
+    <PackageReference Include="Polly" Version="8.6.6" />
+    <PackageReference Include="RestSharp" Version="112.1.0" />
+    <PackageReference Include="StackExchange.Redis" Version="2.13.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WarrantyBee.Core\WarrantyBee.Core.csproj" />
+  </ItemGroup>
+
+</Project>
