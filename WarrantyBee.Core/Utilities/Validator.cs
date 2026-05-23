@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 namespace WarrantyBee.Shared.Core.Utilities;
 
 /// <summary>
-/// Provides utility methods for validating various types of data.
+/// Provides utility methods for validating various types of data across the ecosystem.
 /// </summary>
 public static class Validator
 {
