@@ -12,11 +12,17 @@ public class TelemetryActionFilter : IAsyncActionFilter
 {
     private readonly ITelemetryService _telemetry;
 
+    /// <summary>
+    /// Executes the primary logic.
+    /// </summary>
     public TelemetryActionFilter(ITelemetryService telemetry)
     {
         _telemetry = telemetry;
     }
 
+    /// <summary>
+    /// Executes the primary logic.
+    /// </summary>
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
         var stopwatch = Stopwatch.StartNew();

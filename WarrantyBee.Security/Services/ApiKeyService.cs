@@ -15,6 +15,9 @@ public class ApiKeyService : IApiKeyService
     private readonly ICacheService _cacheService;
     private readonly ITelemetryService _telemetry;
 
+    /// <summary>
+    /// Executes the primary logic.
+    /// </summary>
     public ApiKeyService(
         IApiKeyRepository keyRepository,
         ICacheService cacheService,
@@ -25,6 +28,9 @@ public class ApiKeyService : IApiKeyService
         _telemetry = telemetry;
     }
 
+    /// <summary>
+    /// Executes the primary logic.
+    /// </summary>
     public async Task<bool> ValidateAsync(string appId, string appSecret)
     {
         if (string.IsNullOrWhiteSpace(appId) || string.IsNullOrWhiteSpace(appSecret)) return false;

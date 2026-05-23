@@ -14,6 +14,9 @@ public class ApiKeyAttribute : Attribute, IAsyncActionFilter
     private const string AppIdHeaderName = "X-APP-ID";
     private const string AppSecretHeaderName = "X-APP-SECRET";
 
+    /// <summary>
+    /// Executes the primary logic.
+    /// </summary>
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
         var request = context.HttpContext.Request;

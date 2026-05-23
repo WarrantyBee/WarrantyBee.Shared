@@ -21,6 +21,9 @@ public class CurrentUserContext : ICurrentUserContext
         _httpContextAccessor = httpContextAccessor;
     }
 
+    /// <summary>
+    /// Defines a shared component property or field.
+    /// </summary>
     public long? UserId
     {
         get
@@ -30,9 +33,15 @@ public class CurrentUserContext : ICurrentUserContext
         }
     }
 
+    /// <summary>
+    /// Executes the primary logic.
+    /// </summary>
     public string? Email => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Email) 
                            ?? _httpContextAccessor.HttpContext?.User?.FindFirstValue("email");
 
+    /// <summary>
+    /// Defines a shared component property or field.
+    /// </summary>
     public SecurityRole Role
     {
         get
@@ -43,6 +52,9 @@ public class CurrentUserContext : ICurrentUserContext
         }
     }
 
+    /// <summary>
+    /// Defines a shared component property or field.
+    /// </summary>
     public IEnumerable<SecurityPermission> Permissions
     {
         get

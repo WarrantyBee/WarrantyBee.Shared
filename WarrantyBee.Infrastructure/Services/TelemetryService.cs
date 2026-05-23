@@ -36,6 +36,9 @@ public class TelemetryService : ITelemetryService
         }
     }
 
+    /// <summary>
+    /// Executes the primary logic.
+    /// </summary>
     public void TrackEvent(string eventName, IDictionary<string, object>? properties = null)
     {
         _logger.LogInformation("Event: {EventName}, Properties: {@Properties}", eventName, properties);
@@ -47,6 +50,9 @@ public class TelemetryService : ITelemetryService
         });
     }
 
+    /// <summary>
+    /// Executes the primary logic.
+    /// </summary>
     public void Log(WarrantyBee.Shared.Core.Enums.LogLevel level, string message, IDictionary<string, object>? context = null)
     {
         var dotNetLevel = MapLevel(level);
@@ -59,6 +65,9 @@ public class TelemetryService : ITelemetryService
         });
     }
 
+    /// <summary>
+    /// Executes the primary logic.
+    /// </summary>
     public void Log(WarrantyBee.Shared.Core.Enums.LogLevel level, Exception exception, IDictionary<string, object>? context = null)
     {
         var dotNetLevel = MapLevel(level);
@@ -74,6 +83,9 @@ public class TelemetryService : ITelemetryService
         });
     }
 
+    /// <summary>
+    /// Executes the primary logic.
+    /// </summary>
     public void TrackMetric(string metricName, double value, IDictionary<string, object>? properties = null)
     {
         _logger.LogInformation("Metric: {MetricName}, Value: {Value}, Properties: {@Properties}", metricName, value, properties);
@@ -87,6 +99,9 @@ public class TelemetryService : ITelemetryService
         });
     }
 
+    /// <summary>
+    /// Executes the primary logic.
+    /// </summary>
     public void Flush() { }
 
     private Microsoft.Extensions.Logging.LogLevel MapLevel(WarrantyBee.Shared.Core.Enums.LogLevel level) => level switch
