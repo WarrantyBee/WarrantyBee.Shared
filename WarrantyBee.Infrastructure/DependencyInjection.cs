@@ -24,6 +24,7 @@ public static class DependencyInjection
         services.AddScoped<IEventPublisher, EventPublisher>();
         services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
         services.AddScoped<ICurrentUserContext, CurrentUserContext>();
+        services.AddScoped<IOcrService, SmartOcrService>();
         
         // Register filters
         services.AddScoped<TelemetryActionFilter>();

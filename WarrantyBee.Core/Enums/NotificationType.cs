@@ -23,5 +23,10 @@ public enum NotificationType
     /// <summary>
     /// Notification indicating a password change.
     /// </summary>
-    PasswordChanged = 4
+    PasswordChanged = 4,
+
+    /// <summary>
+    /// Notification informing a customer of a change in their warranty claim status.
+    /// </summary>
+    ClaimStatusUpdated = 5
 }

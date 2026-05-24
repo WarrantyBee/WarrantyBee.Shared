@@ -92,6 +92,16 @@ public static class HashHelper
     }
 
     /// <summary>
+    /// Generates a simple SHA256 hash for internal tokens (like refresh tokens).
+    /// </summary>
+    public static string ComputeHash(string input)
+    {
+        using var sha256 = SHA256.Create();
+        var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
+        return Convert.ToHexString(bytes).ToLower();
+    }
+
+    /// <summary>
     /// Generates a secure random token.
     /// </summary>
     /// <returns>A hexadecimal string representation of the generated token.</returns>

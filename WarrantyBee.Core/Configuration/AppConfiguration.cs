@@ -138,6 +138,11 @@ public class JwtTokenConfiguration
     /// Gets or sets the token expiration time in minutes.
     /// </summary>
     public int Expiration { get; set; }
+
+    /// <summary>
+    /// Gets or sets the refresh token expiration time in days.
+    /// </summary>
+    public int RefreshTokenExpirationDays { get; set; }
 }
 
 /// <summary>

@@ -33,20 +33,32 @@ public enum SecurityPermission
     /// Technical auditing and log access.
     /// </summary>
     AuditSystem = 11,
+    /// <summary>
+    /// Generate secure onboarding links for new businesses.
+    /// </summary>
+    OnboardBusiness = 12,
 
     // Business Level
     /// <summary>
-    /// Manage users within a specific business tenant.
+    /// Manage the business's public profile and branding.
     /// </summary>
-    ManageBusinessUsers = 20,
+    ManageBusinessProfile = 20,
+    /// <summary>
+    /// Manage users and staff within a specific business tenant.
+    /// </summary>
+    ManageBusinessUsers = 21,
+    /// <summary>
+    /// Generate invitation links for internal staff.
+    /// </summary>
+    InviteStaff = 22,
     /// <summary>
     /// Manage the product catalog and warranty policies.
     /// </summary>
-    ManageProducts = 21,
+    ManageProducts = 23,
     /// <summary>
     /// Analyze trends and manage spare parts inventory.
     /// </summary>
-    ManageLogistics = 22,
+    ManageLogistics = 24,
     
     // Claim & Service Management
     /// <summary>

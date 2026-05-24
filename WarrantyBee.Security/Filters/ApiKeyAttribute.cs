@@ -23,18 +23,18 @@ public class ApiKeyAttribute : Attribute, IAsyncActionFilter
         var request = context.HttpContext.Request;
         var requestedPath = request.Path.Value ?? string.Empty;
         var apiKeyService = context.HttpContext.RequestServices.GetRequiredService<IApiKeyService>();
-        bool isValid = false;
+        ApiClientContext? apiClientContext = null;
 
         // 1. Check for standalone API Key
         if (request.Headers.TryGetValue(ApiKeyHeaderName, out var apiKey))
         {
-            isValid = await apiKeyService.ValidateKeyAsync(apiKey!, requestedPath);
+            apiClientContext = await apiKeyService.ValidateKeyAsync(apiKey!, requestedPath);
         }
         // 2. Check for App ID + App Secret pair
         else if (request.Headers.TryGetValue(AppIdHeaderName, out var appId) &&
                  request.Headers.TryGetValue(AppSecretHeaderName, out var appSecret))
         {
-            isValid = await apiKeyService.ValidateAsync(appId!, appSecret!, requestedPath);
+            apiClientContext = await apiKeyService.ValidateAsync(appId!, appSecret!, requestedPath);
         }
         else
         {
@@ -42,7 +42,7 @@ public class ApiKeyAttribute : Attribute, IAsyncActionFilter
             return;
         }
 
-        if (!isValid)
+        if (apiClientContext == null)
         {
             context.Result = new ObjectResult("Invalid API credentials or unauthorized endpoint access.") { StatusCode = 403 };
             return;
