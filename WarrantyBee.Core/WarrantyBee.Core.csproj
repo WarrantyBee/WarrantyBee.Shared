@@ -11,7 +11,7 @@
     <Company>WarrantyBee</Company>
     <Description>Foundational logic and common contracts for the WarrantyBee ecosystem.</Description>
     <PackageIcon>logo.png</PackageIcon>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <RepositoryUrl>https://github.com/WarrantyBee/WarrantyBee.Shared</RepositoryUrl>
   </PropertyGroup>
 

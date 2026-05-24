@@ -1,7 +1,7 @@
 namespace WarrantyBee.Shared.Core.Enums;
 
 /// <summary>
-/// Represents the security roles available in the system.
+/// Represents the security roles available in the system, organized by Platform, Business, Network, and Consumer tiers.
 /// </summary>
 public enum SecurityRole
 {
@@ -9,40 +9,56 @@ public enum SecurityRole
     /// No role specified.
     /// </summary>
     None = 0,
+
+    // TIER 1: Platform Level
     /// <summary>
-    /// Super administrator role.
+    /// Ultimate platform administrator with access to all tenants and system configurations.
     /// </summary>
-    SuperAdmin = 1,
+    PlatformAdmin = 1,
     /// <summary>
-    /// Manufacturer role.
+    /// System support and technical auditor for the platform.
     /// </summary>
-    Manufacturer = 2,
+    PlatformSupport = 2,
+
+    // TIER 2: Business Level (Brand/OEM)
     /// <summary>
-    /// Vendor role.
+    /// The primary owner of a business tenant.
     /// </summary>
-    Vendor = 3,
+    BusinessOwner = 3,
     /// <summary>
-    /// Retailer role.
+    /// Administrator for a specific business tenant.
     /// </summary>
-    Retailer = 4,
+    BusinessAdmin = 4,
     /// <summary>
-    /// Service center manager role.
+    /// Operations manager focusing on logistics and trends for the brand.
     /// </summary>
-    ServiceCenterManager = 5,
+    Planner = 5,
     /// <summary>
-    /// Technician role.
+    /// Frontline support agent for the brand.
     /// </summary>
-    Technician = 6,
+    BrandSupport = 6,
+
+    // TIER 3: Network Level (Supply & Service)
     /// <summary>
-    /// Customer role.
+    /// Bulk buyer and stock manager for a brand.
     /// </summary>
-    Customer = 7,
+    Distributor = 7,
     /// <summary>
-    /// Support agent role.
+    /// Front-facing seller who activates warranties upon purchase.
     /// </summary>
-    SupportAgent = 8,
+    Retailer = 8,
     /// <summary>
-    /// Auditor role.
+    /// Manager of an authorized service center who dispatches technicians.
     /// </summary>
-    Auditor = 9
+    ServiceCenterAdmin = 9,
+    /// <summary>
+    /// Field agent responsible for performing appliance repairs.
+    /// </summary>
+    Technician = 10,
+
+    // TIER 4: Consumer Level
+    /// <summary>
+    /// End-user who owns products and initiates claims.
+    /// </summary>
+    Customer = 11
 }
