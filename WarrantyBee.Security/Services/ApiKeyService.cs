@@ -16,7 +16,7 @@ public class ApiKeyService : IApiKeyService
     private readonly ITelemetryService _telemetry;
 
     /// <summary>
-    /// Executes the primary logic.
+    /// Initializes a new instance of the <see cref="ApiKeyService"/> class.
     /// </summary>
     public ApiKeyService(
         IApiKeyRepository keyRepository,
@@ -29,14 +29,14 @@ public class ApiKeyService : IApiKeyService
     }
 
     /// <summary>
-    /// Executes the primary logic.
+    /// Validates the application credentials and ensures the requested path is allowed.
     /// </summary>
-    public async Task<bool> ValidateAsync(string appId, string appSecret)
+    public async Task<bool> ValidateAsync(string appId, string appSecret, string requestedPath)
     {
         if (string.IsNullOrWhiteSpace(appId) || string.IsNullOrWhiteSpace(appSecret)) return false;
 
         var secretHash = ComputeHash(appSecret);
-        var cacheKey = $"apikey:{appId}:{secretHash}";
+        var cacheKey = $"apikey:{appId}:{secretHash}:{requestedPath}";
 
         // 1. Check Cache
         var cachedResult = await _cacheService.GetAsync(cacheKey);
@@ -46,14 +46,45 @@ public class ApiKeyService : IApiKeyService
         }
 
         // 2. Check Database
-        var isValid = await _keyRepository.ValidateAsync(appId, secretHash);
+        var isValid = await _keyRepository.ValidateAsync(appId, secretHash, requestedPath);
 
         // 3. Cache Result (5 minutes)
         await _cacheService.SetAsync(cacheKey, isValid ? "1" : "0", 300);
 
         if (!isValid)
         {
-            _telemetry.Log(LogLevel.Warn, $"Invalid API Key attempt for AppId: {appId}");
+            _telemetry.Log(LogLevel.Warn, $"Invalid API access attempt. AppId: {appId}, Path: {requestedPath}");
+        }
+
+        return isValid;
+    }
+
+    /// <summary>
+    /// Validates a standalone API key and ensures the requested path is allowed.
+    /// </summary>
+    public async Task<bool> ValidateKeyAsync(string apiKey, string requestedPath)
+    {
+        if (string.IsNullOrWhiteSpace(apiKey)) return false;
+
+        var keyHash = ComputeHash(apiKey);
+        var cacheKey = $"apikey:standalone:{keyHash}:{requestedPath}";
+
+        // 1. Check Cache
+        var cachedResult = await _cacheService.GetAsync(cacheKey);
+        if (cachedResult != null)
+        {
+            return cachedResult == "1";
+        }
+
+        // 2. Check Database
+        var isValid = await _keyRepository.ValidateKeyAsync(keyHash, requestedPath);
+
+        // 3. Cache Result (5 minutes)
+        await _cacheService.SetAsync(cacheKey, isValid ? "1" : "0", 300);
+
+        if (!isValid)
+        {
+            _telemetry.Log(LogLevel.Warn, $"Invalid standalone API Key access attempt. Path: {requestedPath}");
         }
 
         return isValid;
