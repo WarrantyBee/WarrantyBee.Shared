@@ -48,6 +48,8 @@ public static class HashHelper
     {
         if (string.IsNullOrWhiteSpace(text) || string.IsNullOrWhiteSpace(storedHash)) return false;
 
+        storedHash = storedHash.Trim();
+
         if (!storedHash.StartsWith("$argon2id$")) return false;
 
         try
